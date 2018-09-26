@@ -1,6 +1,6 @@
 
 
-THIS IS A WORK IN PROGRASS FORK.
+THIS IS A WORK IN PROGRESS FORK.
 NO SUPPORT OF ANY KIND FOR NON-DEVELOPERS.
 
 Open up issues if you spot sth that's not working, I'll have a look at it.

@@ -71,28 +71,28 @@ public class VanillaModule
         /*
          * Plant growth
          */
-        PlantGrowthModification cropGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setBiomeGrowthModifier(Type.FOREST, 1).setBiomeGrowthModifier(Type.PLAINS, 1);
+        PlantGrowthModification cropGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setModifierForType(Type.FOREST, 1).setModifierForType(Type.PLAINS, 1);
         PlantGrowthModule.registerPlantGrowthModifier(BlockCrops.class, cropGrowthModification);
         PlantGrowthModule.registerPlantGrowthModifier(BlockCarrot.class, cropGrowthModification);
         PlantGrowthModule.registerPlantGrowthModifier(BlockPotato.class, cropGrowthModification);
         PlantGrowthModule.registerPlantGrowthModifier(BlockBeetroot.class, cropGrowthModification);
 
-        PlantGrowthModification reedGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.sugarcaneRegrowthMultiplier).setBiomeGrowthModifier(Type.JUNGLE, 1).setBiomeGrowthModifier(Type.SWAMP, 1).setWrongBiomeMultiplier(Config.wrongBiomeRegrowthMultiplierSugarcane);
+        PlantGrowthModification reedGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.sugarcaneRegrowthMultiplier).setModifierForType(Type.JUNGLE, 1).setModifierForType(Type.SWAMP, 1).setGenericWrongTypeMultiplier(Config.wrongBiomeRegrowthMultiplierSugarcane);
         PlantGrowthModule.registerPlantGrowthModifier(BlockReed.class, reedGrowthModification);
 
-        PlantGrowthModification stemGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setBiomeGrowthModifier(Type.JUNGLE, 1).setBiomeGrowthModifier(Type.SWAMP, 1);
+        PlantGrowthModification stemGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setModifierForType(Type.JUNGLE, 1).setModifierForType(Type.SWAMP, 1);
         PlantGrowthModule.registerPlantGrowthModifier(BlockStem.class, stemGrowthModification);
 
-        PlantGrowthModification cocoaGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.cocoaRegrowthMultiplier).setBiomeGrowthModifier(Type.JUNGLE, 1);
+        PlantGrowthModification cocoaGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.cocoaRegrowthMultiplier).setModifierForType(Type.JUNGLE, 1);
         PlantGrowthModule.registerPlantGrowthModifier(BlockCocoa.class, cocoaGrowthModification);
 
-        PlantGrowthModification cactusGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.cactusRegrowthMultiplier).setBiomeGrowthModifier(Type.SANDY, 1);
+        PlantGrowthModification cactusGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.cactusRegrowthMultiplier).setModifierForType(Type.SANDY, 1);
         PlantGrowthModule.registerPlantGrowthModifier(BlockCactus.class, cactusGrowthModification);
 
         PlantGrowthModification saplingGrowthModification = new PlantGrowthModification().setGrowthTickProbability(Config.saplingRegrowthMultiplier);
         PlantGrowthModule.registerPlantGrowthModifier(BlockSapling.class, saplingGrowthModification);
 
-        PlantGrowthModification netherWartGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.netherWartRegrowthMultiplier).setBiomeGrowthModifier(Type.NETHER, 1);
+        PlantGrowthModification netherWartGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.netherWartRegrowthMultiplier).setModifierForType(Type.NETHER, 1);
         PlantGrowthModule.registerPlantGrowthModifier(BlockNetherWart.class, netherWartGrowthModification);
 
         /*

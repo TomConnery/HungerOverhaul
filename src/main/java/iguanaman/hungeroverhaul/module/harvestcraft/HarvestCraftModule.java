@@ -26,7 +26,6 @@ import net.minecraft.item.Item;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.EnumDifficulty;
 import net.minecraft.world.World;
-import net.minecraftforge.common.BiomeDictionary.Type;
 import squeek.applecore.api.food.FoodValues;
 
 public class HarvestCraftModule
@@ -777,37 +776,55 @@ public class HarvestCraftModule
             FoodModifier.setModifiedFoodValues(ItemRegistry.redvelvetcakeItem, new FoodValues(7, 0.35F));
         }
 
-        // Sapling Growth
-        PlantGrowthModification genericSaplingGrowthModification = new PlantGrowthModification().setGrowthTickProbability(Config.saplingRegrowthMultiplier);
-        PlantGrowthModule.registerPlantGrowthModifier(BlockPamSapling.class, genericSaplingGrowthModification);
+        //---------------------
+        // saplings
+        //---------------------
 
-        PlantGrowthModification temperateSaplingGrowthModification = new PlantGrowthModification().setGrowthTickProbability(Config.saplingRegrowthMultiplier).setBiomeGrowthModifier(Type.FOREST, 1).setBiomeGrowthModifier(Type.PLAINS, 1);
+        //generic saplings without special mapping
+        PlantGrowthModification genericSaplingModifier = PlantGrowthModification.GENERIC_SAPLING_MODIFIER;
+        PlantGrowthModule.registerPlantGrowthModifier(BlockPamSapling.class, genericSaplingModifier);
+
+
+        //temperate saplings
+        PlantGrowthModification temperateSaplingModifier = PlantGrowthModification.TEMPERATE_SAPLING_MODIFIER;
         for (Block temperateSapling : FruitRegistry.temperateSaplings.values())
         {
-            PlantGrowthModule.registerPlantGrowthModifier(temperateSapling, temperateSaplingGrowthModification);
+            PlantGrowthModule.registerPlantGrowthModifier(temperateSapling, temperateSaplingModifier);
         }
-        PlantGrowthModule.registerPlantGrowthModifier(FruitRegistry.getSapling(FruitRegistry.MAPLE), temperateSaplingGrowthModification);
+        PlantGrowthModule.registerPlantGrowthModifier(FruitRegistry.getSapling(FruitRegistry.MAPLE), temperateSaplingModifier);
 
-        PlantGrowthModification warmSaplingGrowthModification = new PlantGrowthModification().setGrowthTickProbability(Config.saplingRegrowthMultiplier).setBiomeGrowthModifier(Type.JUNGLE, 1).setBiomeGrowthModifier(Type.SWAMP, 1);
+
+        //warm saplings
+        PlantGrowthModification warmSaplingModifier = PlantGrowthModification.WARM_SAPLING_MODIFIER;
         for (Block warmSapling : FruitRegistry.warmSaplings.values())
         {
-            PlantGrowthModule.registerPlantGrowthModifier(warmSapling, warmSaplingGrowthModification);
+            PlantGrowthModule.registerPlantGrowthModifier(warmSapling, warmSaplingModifier);
         }
-        PlantGrowthModule.registerPlantGrowthModifier(FruitRegistry.getSapling(FruitRegistry.CINNAMON), warmSaplingGrowthModification);
+        PlantGrowthModule.registerPlantGrowthModifier(FruitRegistry.getSapling(FruitRegistry.CINNAMON), warmSaplingModifier);
 
-        // Fruit Growth
-        PlantGrowthModification genericFruitGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.treeCropRegrowthMultiplier);
-        PlantGrowthModule.registerPlantGrowthModifier(BlockPamFruit.class, genericFruitGrowthModification);
 
-        PlantGrowthModification temperateFruitGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.treeCropRegrowthMultiplier).setBiomeGrowthModifier(Type.FOREST, 1).setBiomeGrowthModifier(Type.PLAINS, 1);
+        //---------------------
+        // fruits
+        //---------------------
+
+
+        //generic fruits
+        PlantGrowthModification genericFruitModifier = PlantGrowthModification.GENERIC_FRUIT_MODIFIER;
+        PlantGrowthModule.registerPlantGrowthModifier(BlockPamFruit.class, genericFruitModifier);
+
+
+        //temperate fruits
+        PlantGrowthModification temperateFruitGrowthModification = PlantGrowthModification.TEMPERATE_FRUIT_MODIFIER;
         for (Block temperateSapling : FruitRegistry.temperateSaplings.values())
         {
             Block fruitBlock = PamsModsHelper.saplingToFruitBlockMap.get(temperateSapling);
             PlantGrowthModule.registerPlantGrowthModifier(fruitBlock, temperateFruitGrowthModification);
         }
-        PlantGrowthModule.registerPlantGrowthModifier(FruitRegistry.getLog(FruitRegistry.MAPLE), temperateSaplingGrowthModification);
+        PlantGrowthModule.registerPlantGrowthModifier(FruitRegistry.getLog(FruitRegistry.MAPLE), temperateSaplingModifier);
 
-        PlantGrowthModification warmFruitGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.treeCropRegrowthMultiplier).setBiomeGrowthModifier(Type.JUNGLE, 1).setBiomeGrowthModifier(Type.SWAMP, 1);
+
+        //warm fruits
+        PlantGrowthModification warmFruitGrowthModification = PlantGrowthModification.WARM_FRUIT_MODIFIER;
         for (Block warmSapling : FruitRegistry.warmSaplings.values())
         {
             Block fruitBlock = PamsModsHelper.saplingToFruitBlockMap.get(warmSapling);
@@ -815,15 +832,21 @@ public class HarvestCraftModule
         }
         PlantGrowthModule.registerPlantGrowthModifier(FruitRegistry.getLog(FruitRegistry.CINNAMON), warmFruitGrowthModification);
 
-        PlantGrowthModification humidCropGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setBiomeGrowthModifier(Type.JUNGLE, 1).setBiomeGrowthModifier(Type.SWAMP, 1);
-        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.PINEAPPLE), humidCropGrowthModification);
-        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.SPICELEAF), humidCropGrowthModification);
-        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.CANDLEBERRY), humidCropGrowthModification);
-        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.GRAPE), humidCropGrowthModification);
-        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.KIWI), humidCropGrowthModification);
 
-        PlantGrowthModification desertCropGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setBiomeGrowthModifier(Type.SANDY, 1);
-        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.CACTUSFRUIT), desertCropGrowthModification);
+        //humid crops
+        PlantGrowthModification humidModifier = PlantGrowthModification.TROPICAL_GROWTH_MODIFIER;
+        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.PINEAPPLE), humidModifier);
+        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.SPICELEAF), humidModifier);
+        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.CANDLEBERRY), humidModifier);
+        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.GRAPE), humidModifier);
+        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.KIWI), humidModifier);
+
+
+        //sandy crops
+        PlantGrowthModule.registerPlantGrowthModifier(CropRegistry.getCrop(CropRegistry.CACTUSFRUIT), PlantGrowthModification.ARID_GROWTH_MODIFIER);
+
+
+
 
         /*
          * Bonemeal
@@ -833,7 +856,7 @@ public class HarvestCraftModule
             @Override
             public IBlockState getNewState(World world, BlockPos pos, IBlockState currentState)
             {
-                int currentMeta = currentState.getValue(BlockPamCrop.CROPS_AGE);
+                int currentMeta = currentState.getValue(BlockPamCrop.AGE);
                 int metaFullyGrown = 3;
                 int metaIncrease = 0;
 
@@ -848,7 +871,7 @@ public class HarvestCraftModule
                     }
                 }
 
-                return currentState.withProperty(BlockPamCrop.CROPS_AGE, Math.min(currentMeta + metaIncrease, metaFullyGrown));
+                return currentState.withProperty(BlockPamCrop.AGE, Math.min(currentMeta + metaIncrease, metaFullyGrown));
             }
         };
         BonemealModule.registerBonemealModifier(BlockPamCrop.class, cropBonemealModification);

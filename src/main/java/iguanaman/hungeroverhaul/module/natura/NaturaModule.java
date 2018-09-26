@@ -115,22 +115,22 @@ public class NaturaModule
         /*
          * Plant growth
          */
-        PlantGrowthModification cottonGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setBiomeGrowthModifier(Type.FOREST, 1).setBiomeGrowthModifier(Type.PLAINS, 1);
+        PlantGrowthModification cottonGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setModifierForType(Type.FOREST, 1).setModifierForType(Type.PLAINS, 1);
         PlantGrowthModule.registerPlantGrowthModifier(BlockNaturaCotton.class, cottonGrowthModification);
 
-        PlantGrowthModification barleyGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setBiomeGrowthModifier(Type.FOREST, 1).setBiomeGrowthModifier(Type.PLAINS, 1);
+        PlantGrowthModification barleyGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setModifierForType(Type.FOREST, 1).setModifierForType(Type.PLAINS, 1);
         PlantGrowthModule.registerPlantGrowthModifier(BlockNaturaBarley.class, barleyGrowthModification);
 
         /*
          * TODO: FIX
-         * PlantGrowthModification saguaroGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.cactusRegrowthMultiplier).setBiomeGrowthModifier(Type.SANDY, 1);
+         * PlantGrowthModification saguaroGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.cactusRegrowthMultiplier).setModifierForType(Type.SANDY, 1);
          * PlantGrowthModule.registerPlantGrowthModifier(SaguaroBlock.class, saguaroGrowthModification);
         */
 
-        PlantGrowthModification berryBushGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setBiomeGrowthModifier(Type.FOREST, 1).setBiomeGrowthModifier(Type.PLAINS, 1);
+        PlantGrowthModification berryBushGrowthModification = new PlantGrowthModification().setNeedsSunlight(true).setGrowthTickProbability(Config.cropRegrowthMultiplier).setModifierForType(Type.FOREST, 1).setModifierForType(Type.PLAINS, 1);
         PlantGrowthModule.registerPlantGrowthModifier(BlockOverworldBerryBush.class, berryBushGrowthModification);
 
-        PlantGrowthModification netherBushGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.cropRegrowthMultiplier).setBiomeGrowthModifier(Type.NETHER, 1);
+        PlantGrowthModification netherBushGrowthModification = new PlantGrowthModification().setNeedsSunlight(false).setGrowthTickProbability(Config.cropRegrowthMultiplier).setModifierForType(Type.NETHER, 1);
         PlantGrowthModule.registerPlantGrowthModifier(BlockNetherBerryBush.class, netherBushGrowthModification);
 
         /*

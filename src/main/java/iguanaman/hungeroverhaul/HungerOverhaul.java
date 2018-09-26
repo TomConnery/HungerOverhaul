@@ -2,6 +2,7 @@ package iguanaman.hungeroverhaul;
 
 import java.io.File;
 
+import iguanaman.hungeroverhaul.module.rustic.RusticModule;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,7 +43,7 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.registries.IForgeRegistry;
 
-@Mod(modid = HungerOverhaul.modID, name = HungerOverhaul.modName, version = HungerOverhaul.modVersion, dependencies = "required-after:forge@[14.21.1.2387,);required-after:applecore;before:get_back_to_home;after:tconstruct;after:harvestcraft@[1.12.2m,);after:natura@[1.12-4.3.0.17,);after:ic2;after:biomesoplenty", acceptedMinecraftVersions = "[1.12, 1.13)")
+@Mod(modid = HungerOverhaul.modID, name = HungerOverhaul.modName, version = HungerOverhaul.modVersion, dependencies = "required-after:forge@[14.23.4.2705,);required-after:applecore;before:get_back_to_home;after:tconstruct;after:harvestcraft@[1.12.2m,);after:natura@[1.12-4.3.0.17,);after:ic2;after:biomesoplenty", acceptedMinecraftVersions = "[1.12, 1.13)")
 public class HungerOverhaul
 {
     public static final String modID = Util.MODID;
@@ -103,6 +104,11 @@ public class HungerOverhaul
         if (Loader.isModLoaded("biomesoplenty"))
         {
             BiomesOPlentyModule.init();
+        }
+
+        if (Loader.isModLoaded("rustic"))
+        {
+            RusticModule.init();
         }
 
         JsonModule.init();

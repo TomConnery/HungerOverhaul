@@ -13,6 +13,7 @@ import net.minecraftforge.event.world.BlockEvent.CropGrowEvent.Pre;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
+
 public class PlantGrowthModule
 {
     private static HashMap<Class<? extends Block>, PlantGrowthModification> plantGrowthModificationsByBlockClass = new HashMap<Class<? extends Block>, PlantGrowthModification>();
@@ -66,6 +67,16 @@ public class PlantGrowthModule
         return growthModifier;
     }
 
+    /**
+     * Map-wrapper for {@link #registerPlantGrowthModifier(Block, PlantGrowthModification)}
+     * @param mods the modifiers to register
+     */
+    public static void registerPlantGrowthModifiers(Map<Block, PlantGrowthModification> mods) {
+        for (Map.Entry<Block, PlantGrowthModification> entry : mods.entrySet()) {
+            registerPlantGrowthModifier(entry.getKey(), entry.getValue());
+        }
+    }
+
     @SubscribeEvent
     public void allowGrowthTick(Pre event)
     {
@@ -85,7 +96,7 @@ public class PlantGrowthModule
         }
 
         // biome
-        float biomeModifier = growthModification.wrongBiomeMultiplier;
+        float biomeModifier = growthModification.genericWrongTypeMultiplier;
         if (!growthModification.biomeGrowthModifiers.isEmpty())
         {
             biomeModifier = Config.wrongBiomeRegrowthMultiplier;
@@ -95,7 +106,7 @@ public class PlantGrowthModule
             {
                 if (growthModification.biomeGrowthModifiers.containsKey(type))
                 {
-                    biomeModifier = growthModification.getBiomeGrowthModifier(type);
+                    biomeModifier = growthModification.getModifierForType(type);
                     break;
                 }
             }

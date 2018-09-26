@@ -201,6 +201,9 @@ public class Config
         lowHealthRegenRateModifier = lowHealthRegenRateModifierOption.get(config);
         foodHealDivider = foodHealDividerOption.get(config);
 
+        //rustic
+        rusticGrowthModifier = rusticGrowthModifierOption.get(config);
+
         final boolean configChanged = config.hasChanged();
         if (configChanged)
         {
@@ -276,6 +279,7 @@ public class Config
     public static final ConfigCategory CATEGORY_HUNGER = addCategory("hunger", "Options related to hunger");
     public static final ConfigCategory CATEGORY_LOW_STATS = addCategory("low stats", "Options for how to handle when the player get low health/hunger");
     public static final ConfigCategory CATEGORY_HEALTH = addCategory("health", "Options related to health");
+    public static final ConfigCategory CATEGORY_RUSTIC = addCategory("rustic","Options related to Rustic.\n" + TextFormatting.RED + "Only works if Rustic is installed!");
 
     public static ConfigCategory addCategory(String name, String comment)
     {
@@ -507,6 +511,11 @@ public class Config
     public static boolean modifyRegenRateOnLowHealth;
     public static final ConfigOption<Integer> lowHealthRegenRateModifierOption = addOption(CATEGORY_HEALTH, "lowHealthRegenRateModifier", 5, 0, null, 5, "The lower your health the longer it takes to regen, modify the effect here (lower = less effect) (modifyRegenRateOnLowHealth must be true)");
     public static int lowHealthRegenRateModifier;
+
+
+    //rustic
+    public static final ConfigOption<Double> rusticGrowthModifierOption = addOption(CATEGORY_RUSTIC, "rusicGrowthModifier", 0.0,0.0, "This value is multiplied with the growth-probabilities of the Crops added by Rustic");
+    public static double rusticGrowthModifier;
 
     static Configuration config;
     static Configuration blankSlateConfig;

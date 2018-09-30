@@ -2,6 +2,7 @@ package iguanaman.hungeroverhaul.module.growth;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import iguanaman.hungeroverhaul.common.RandomHelper;
 import iguanaman.hungeroverhaul.common.config.Config;
@@ -12,14 +13,15 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.BlockEvent.CropGrowEvent.Pre;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import static iguanaman.hungeroverhaul.HungerOverhaul.log;
 
 
 public class PlantGrowthModule
 {
-    private static HashMap<Class<? extends Block>, PlantGrowthModification> plantGrowthModificationsByBlockClass = new HashMap<Class<? extends Block>, PlantGrowthModification>();
+    private static HashMap<Class<? extends Block>, PlantGrowthModification> plantGrowthModificationsByBlockClass = new HashMap<>();
 
-    private static HashMap<Block, PlantGrowthModification> plantGrowthModificationsByBlock = new HashMap<Block, PlantGrowthModification>();
-
+    private static HashMap<Block, PlantGrowthModification> plantGrowthModificationsByBlock = new HashMap<>();
+    
     public static void registerPlantGrowthModifier(Class<? extends Block> blockClass, PlantGrowthModification growthModification)
     {
         plantGrowthModificationsByBlockClass.put(blockClass, growthModification);
@@ -62,6 +64,10 @@ public class PlantGrowthModule
                 {
                     return entry.getValue();
                 }
+
+                if (entry.getKey() == blockClass) {
+                    return entry.getValue();
+                }
             }
         }
         return growthModifier;
@@ -77,10 +83,25 @@ public class PlantGrowthModule
         }
     }
 
+    /**
+     * Map-wrapper for {@link #registerPlantGrowthModifier(Class, PlantGrowthModification)}
+     * @param mods the modifiers to register
+     */
+    public static void registerPlantGrowthModifiersClasses(Map<Class<? extends Block>, PlantGrowthModification> mods) {
+        for (Map.Entry<Class<? extends Block>, PlantGrowthModification> entry : mods.entrySet()) {
+            registerPlantGrowthModifier(entry.getKey(), entry.getValue());
+        }
+    }
+
     @SubscribeEvent
     public void allowGrowthTick(Pre event)
     {
-        PlantGrowthModification growthModification = getPlantGrowthModification(event.getState().getBlock().getClass());
+
+        Class<? extends Block> blockClass = event.getState().getBlock().getClass();
+
+        PlantGrowthModification growthModification = getPlantGrowthModification(blockClass);
+
+        log.info(String.format("Passed class %s has modifier: %s", blockClass.getName(), growthModification==null ?  null : growthModification.toString() ));
 
         if (growthModification == null)
         {
@@ -126,5 +147,11 @@ public class PlantGrowthModule
 
         // still go through with the default conditionals
         event.setResult(Result.DEFAULT);
+    }
+
+    @Override
+    public String toString() {
+        return new StringJoiner(", ", PlantGrowthModule.class.getSimpleName() + "[", "]")
+                .toString();
     }
 }

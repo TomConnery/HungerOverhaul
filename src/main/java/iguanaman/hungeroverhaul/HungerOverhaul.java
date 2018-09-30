@@ -106,10 +106,7 @@ public class HungerOverhaul
             BiomesOPlentyModule.init();
         }
 
-        if (Loader.isModLoaded("rustic"))
-        {
-            RusticModule.init();
-        }
+
 
         JsonModule.init();
 
@@ -128,6 +125,10 @@ public class HungerOverhaul
         TweaksModule.postInit();
         VillageModule.postInit();
         LootModule.postInit();
+
+        if (Loader.isModLoaded("rustic")) {
+            RusticModule.postInit();
+        }
 
         MinecraftForge.EVENT_BUS.register(new HungerOverhaulEventHook());
         MinecraftForge.EVENT_BUS.register(new RespawnHungerModule());

@@ -15,13 +15,31 @@ buildscript {
     }
 }
 
+//plugins
 apply plugin: 'net.minecraftforge.gradle.forge'
 
+
+//properties
 group= "iguanaman" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "HungerOverhaul"
 
 
+// Define properties file
+ext.configFile = file "build.properties"
+
+configFile.withReader {
+    // Load config.  It shall from now be referenced as simply config or project.config
+    def prop = new Properties()
+    prop.load(it)
+    project.ext.config = new ConfigSlurper().parse prop
+}
+
+
+//repositories and dependencies
 repositories {
+
+    mavenCentral()
+        
     maven {
         name 'DVS1 Maven FS'
         url 'http://dvs1.progwml6.com/files/maven'
@@ -41,20 +59,16 @@ repositories {
          name "Tehnut Maven FS"
          url "http://tehnut.info/maven"
     }
-    flatDir {
+    maven { //CurseForge
+        name "CurseForge"
+        url "https://minecraft.curseforge.com/api/maven/"
+    }
+    flatDir { //can't get Pam from the repo currently so we still need this locally 
         dirs 'libs'
     }
 }
 
-// Define properties file
-ext.configFile = file "build.properties"
-
-configFile.withReader {
-    // Load config.  It shall from now be referenced as simply config or project.config
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
-}
+apply from: "dependencies.gradle"
 
 
 // Finds and sets version data
@@ -91,40 +105,6 @@ minecraft {
     mappings = config.mappings_version
     useDepAts = true
 
-}
-
-dependencies {
-    deobfCompile ("slimeknights.mantle:Mantle:${config.minecraft_version_short}-${config.mantle_version}") {
-        transitive = false
-    }
-
-    deobfCompile ("com.progwml6.natura:natura:${config.minecraft_version}-${config.natura_version}") {
-        transitive = false
-    }
-
-    deobfCompile ("slimeknights:TConstruct:${config.minecraft_version}-${config.tconstruct_version}") {
-        transitive = false
-    }
-
-
-    deobfCompile ("com.github.glitchfiend.biomesoplenty:BiomesOPlenty:${config.minecraft_version}-${config.bop_version}:universal") {
-        transitive = false
-    }
-
-    deobfCompile ("applecore:AppleCore:${config.minecraft_version}-${config.applecore_version}") {
-        transitive = false
-    }
-
-    deobfCompile ("mezz.jei:jei_${config.minecraft_version}:${config.jei_version}") {
-        transitive = false
-    }
-
-    deobfCompile ("mcp.mobius.waila:Hwyla:${config.hwyla_version}_${config.minecraft_version_short}") {
-        transitive = false
-    }
-
-    compile name: "Pam's HarvestCraft 1.12.2y"
-    provided name: "rustic-1.0.9"
 }
 
 // the single quotes in these filenames seems to cause problems with

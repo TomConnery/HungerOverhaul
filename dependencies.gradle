@@ -1,0 +1,38 @@
+dependencies {
+    deobfCompile ("slimeknights.mantle:Mantle:${config.minecraft_version_short}-${config.mantle_version}") {
+        transitive = false
+    }
+
+    deobfCompile ("com.progwml6.natura:natura:${config.minecraft_version}-${config.natura_version}") {
+        transitive = false
+    }
+
+    deobfCompile ("slimeknights:TConstruct:${config.minecraft_version}-${config.tconstruct_version}") {
+        transitive = false
+    }
+
+
+    deobfCompile ("com.github.glitchfiend.biomesoplenty:BiomesOPlenty:${config.minecraft_version}-${config.bop_version}:universal") {
+        transitive = false
+    }
+
+    deobfCompile ("applecore:AppleCore:${config.minecraft_version}-${config.applecore_version}") {
+        transitive = false
+    }
+
+    deobfCompile ("mezz.jei:jei_${config.minecraft_version}:${config.jei_version}") {
+        transitive = false
+    }
+
+    deobfCompile ("mcp.mobius.waila:Hwyla:${config.hwyla_version}_${config.minecraft_version_short}") {
+        transitive = false
+    }
+
+    deobfCompile "rustic:rustic:1.0.9"
+    
+    
+    //these ones will be available on runtime, they won#t bloat the mod
+    //we still need to dl them for obvious reasons, though
+    provided name: "Pam's+HarvestCraft+1.12.2z"
+    
+}

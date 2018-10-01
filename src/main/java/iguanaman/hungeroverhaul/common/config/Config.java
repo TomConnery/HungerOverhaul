@@ -1,19 +1,19 @@
 package iguanaman.hungeroverhaul.common.config;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
-
-import org.apache.logging.log4j.Logger;
-
 import iguanaman.hungeroverhaul.HungerOverhaul;
 import iguanaman.hungeroverhaul.library.Util;
+import iguanaman.hungeroverhaul.module.rustic.RusticModule;
 import net.minecraft.util.text.TextFormatting;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import org.apache.logging.log4j.Logger;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Config
 {
@@ -202,7 +202,13 @@ public class Config
         foodHealDivider = foodHealDividerOption.get(config);
 
         //rustic
-        rusticGrowthModifier = rusticGrowthModifierOption.get(config);
+        rusticGlobalGrowthMul = rusticGrowthModifierOption.get(config);
+        rusticCropGrowthMul = rusticCropGrowthProbabilitMultiplierOption.get(config);
+        rusticTomatoGrowthMul = rusticTomatoGrowthMulOption.get(config);
+        rusticGrapeStemGrowthMul = rusticGrapeStemGrowthMulOption.get(config);
+        rusticGrapeLeavesGrowthMul = rusticGrapeLeavesGrowthMulOption.get(config);
+        rusticChiliGrowthMul = rusticChiliGrowthMulOption.get(config);
+        rusticBerryGrowthMul = rusticBerryGrowthMulOption.get(config);
 
         final boolean configChanged = config.hasChanged();
         if (configChanged)
@@ -513,9 +519,28 @@ public class Config
     public static int lowHealthRegenRateModifier;
 
 
-    //rustic
-    public static final ConfigOption<Double> rusticGrowthModifierOption = addOption(CATEGORY_RUSTIC, "rusicGrowthModifier", 0.0,0.0, "This value is multiplied with the growth-probabilities of the Crops added by Rustic");
-    public static double rusticGrowthModifier;
+    //rustic general options
+    public final static ConfigOption<Double> rusticGrowthModifierOption = addOption(CATEGORY_RUSTIC, "GlobalGrowthProbabilityMultiplier", RusticModule.CONFIG_GLOBAL_GROWTH_MUL,RusticModule.CONFIG_GLOBAL_GROWTH_MUL,"This value is multiplied with the growth-probabilities of all growables added by Rustic");
+    public static double rusticGlobalGrowthMul;
+
+    public final static ConfigOption<Double> rusticCropGrowthProbabilitMultiplierOption =addOption(CATEGORY_RUSTIC, "CropGrowthProbabilityMultiplier", RusticModule.CONFIG_CROP_GROWTH_MUL,RusticModule.CONFIG_CROP_GROWTH_MUL, "This is the multiplier which is applied to all Rustic crops (tomatoes, herbs etc.)");
+    public static double rusticCropGrowthMul;
+
+    //rustic specific crops
+    public final static ConfigOption<Double> rusticTomatoGrowthMulOption = addOption(CATEGORY_RUSTIC,"TomatoGrowthProbabilityMultiplier", RusticModule.CONFIG_TOMATO_GROWTH_MUL, RusticModule.CONFIG_TOMATO_GROWTH_MUL, "Groth-probability multiplier affecting only tomatoes");
+    public static double rusticTomatoGrowthMul;
+
+    public final static ConfigOption<Double> rusticGrapeStemGrowthMulOption = addOption(CATEGORY_RUSTIC,"GrapeStemGrowthMul",RusticModule.CONFIG_GRAPE_LEAVES_GROWTH_MUL, RusticModule.CONFIG_GRAPE_STEM_GROWTH_MUL,"Modifies the growth  multiplier for grape stems");
+    public static double rusticGrapeStemGrowthMul;
+
+    public final static ConfigOption<Double> rusticGrapeLeavesGrowthMulOption = addOption(CATEGORY_RUSTIC,"GrapeStemGrowthMul",RusticModule.CONFIG_GRAPE_LEAVES_GROWTH_MUL, RusticModule.CONFIG_GRAPE_LEAVES_GROWTH_MUL,"Modifies the growth  multiplier for grape leaves");
+    public static double rusticGrapeLeavesGrowthMul;
+
+    public final static ConfigOption<Double> rusticChiliGrowthMulOption = addOption(CATEGORY_RUSTIC, "ChiliGrowthMul", RusticModule.CONFIG_CHILI_GROWTH_MUL,RusticModule.CONFIG_CHILI_GROWTH_MUL, "Modifies the growth  multiplier for chilis");
+    public static double rusticChiliGrowthMul;
+
+    public final static ConfigOption<Double> rusticBerryGrowthMulOption = addOption(CATEGORY_RUSTIC,"BerryGrowthMul", RusticModule.CONFIG_BERRY_GROWTH_MUL, RusticModule.CONFIG_BERRY_GROWTH_MUL, "Modifies the growth  multiplier for berry bushes");
+    public static double rusticBerryGrowthMul;
 
     static Configuration config;
     static Configuration blankSlateConfig;

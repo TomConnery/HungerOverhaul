@@ -195,3 +195,10 @@ uploadArchives {
         }
     }
 }
+
+//testing
+test {
+    useJUnitPlatform {
+        includeEngines 'junit-jupiter', 'junit-vintage'
+    }
+}

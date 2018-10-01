@@ -1,10 +1,10 @@
 package iguanaman.hungeroverhaul.module.growth.modification;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import iguanaman.hungeroverhaul.common.config.Config;
 import net.minecraftforge.common.BiomeDictionary.Type;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class PlantGrowthModification {
 
@@ -53,30 +53,18 @@ public class PlantGrowthModification {
      * @return a new instance with merged biome-list
      */
     public PlantGrowthModification withTypeModifiersOf(PlantGrowthModification other) {
-        try {
-            PlantGrowthModification ret = (PlantGrowthModification) this.clone();
-            ret.setModifiersForTypes(other.biomeGrowthModifiers);
 
-        } catch (CloneNotSupportedException ignored) {}
-        return null;
-    }
-
-
-    @Override
-    protected Object clone() throws CloneNotSupportedException {
-
-        super.clone();
-
-        return new PlantGrowthModification()
+        //first copy this, then apply values for other
+        PlantGrowthModification ret = new PlantGrowthModification()
                 .setGrowthTickProbability(growthTickProbability)
                 .setModifiersForTypes(biomeGrowthModifiers)
                 .setNeedsSunlight(needsSunlight)
                 .setGenericWrongTypeMultiplier(genericWrongTypeMultiplier);
+
+        ret.setModifiersForTypes(other.biomeGrowthModifiers);
+
+        return ret;
     }
-
-
-
-
 
     //---------------------------------
     // default-modifiers for default usage

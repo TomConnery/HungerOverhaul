@@ -1,9 +1,5 @@
 package iguanaman.hungeroverhaul.module.growth;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.StringJoiner;
-
 import iguanaman.hungeroverhaul.common.RandomHelper;
 import iguanaman.hungeroverhaul.common.config.Config;
 import iguanaman.hungeroverhaul.module.growth.modification.PlantGrowthModification;
@@ -13,7 +9,10 @@ import net.minecraftforge.common.BiomeDictionary;
 import net.minecraftforge.event.world.BlockEvent.CropGrowEvent.Pre;
 import net.minecraftforge.fml.common.eventhandler.Event.Result;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
-import static iguanaman.hungeroverhaul.HungerOverhaul.log;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.StringJoiner;
 
 
 public class PlantGrowthModule
@@ -100,8 +99,6 @@ public class PlantGrowthModule
         Class<? extends Block> blockClass = event.getState().getBlock().getClass();
 
         PlantGrowthModification growthModification = getPlantGrowthModification(blockClass);
-
-        log.info(String.format("Passed class %s has modifier: %s", blockClass.getName(), growthModification==null ?  null : growthModification.toString() ));
 
         if (growthModification == null)
         {

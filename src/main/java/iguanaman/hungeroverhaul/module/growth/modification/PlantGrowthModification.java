@@ -54,7 +54,9 @@ public class PlantGrowthModification {
      */
     public PlantGrowthModification withTypeModifiersOf(PlantGrowthModification other) {
 
-        //first copy this, then apply values for other
+        //first copy this via making a new one and applying our values,
+        //then apply the values of the other one
+
         PlantGrowthModification ret = new PlantGrowthModification()
                 .setGrowthTickProbability(growthTickProbability)
                 .setModifiersForTypes(biomeGrowthModifiers)

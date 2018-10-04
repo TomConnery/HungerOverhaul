@@ -201,14 +201,31 @@ public class Config
         lowHealthRegenRateModifier = lowHealthRegenRateModifierOption.get(config);
         foodHealDivider = foodHealDividerOption.get(config);
 
-        //rustic
+        //rustic globals
         rusticGlobalGrowthMul = rusticGrowthModifierOption.get(config);
         rusticCropGrowthMul = rusticCropGrowthProbabilitMultiplierOption.get(config);
+        rusticGlobalHerbGrowthModifier = rusticGlobalHerbGrowthModifierOption.get(config);
+
+        //rustic crops
         rusticTomatoGrowthMul = rusticTomatoGrowthMulOption.get(config);
         rusticGrapeStemGrowthMul = rusticGrapeStemGrowthMulOption.get(config);
         rusticGrapeLeavesGrowthMul = rusticGrapeLeavesGrowthMulOption.get(config);
         rusticChiliGrowthMul = rusticChiliGrowthMulOption.get(config);
         rusticBerryGrowthMul = rusticBerryGrowthMulOption.get(config);
+
+        //rustic herbs
+        rusticCohoshGrowthMul = rusticCohoshGrowthMulOption.get(config);
+        rusticGingsengGrowthMul = rusticGingsentGrowthMulOption.get(config);
+        rusticAloeVeraGrowthMul = rusticAloeVeraGrowthMulOption.get(config);
+        rusticBloodOrchidGrowthMul = rusticBloodOrchidGrowthMulOption.get(config);
+        rusticChamomileGrowthMul = rusticChamomileGrowthMulOption.get(config);
+        rusticCloudsbluffGrowthMul = rusticCloudsbluffGrowthMulOption.get(config);
+        rusticCoreRootGrowthMul = rusticCoreRootGrowthMulOption.get(config);
+        rusticDeathstalkMushroomGrowthMul = rusticDeathstalkMushroomGrowthMulOption.get(config);
+        rusticHorsetailGrowthMul = rusticHorsetailGrowthMulOption.get(config);
+        rusticMarshMallowGrowthMul = rusticMarshMallowGrowthMulOption.get(config);
+        rusticMooncapMushroomGrowthMul = rusticMooncapMushroomGrowthMulOption.get(config);
+        rusticWindThistleGrowthMul =rusticWindThistleGrowthMulOption.get(config);
 
         final boolean configChanged = config.hasChanged();
         if (configChanged)
@@ -520,27 +537,70 @@ public class Config
 
 
     //rustic general options
-    public final static ConfigOption<Double> rusticGrowthModifierOption = addOption(CATEGORY_RUSTIC, "GlobalGrowthProbabilityMultiplier", RusticModule.CONFIG_GLOBAL_GROWTH_MUL,RusticModule.CONFIG_GLOBAL_GROWTH_MUL,"This value is multiplied with the growth-probabilities of all growables added by Rustic");
-    public static double rusticGlobalGrowthMul;
+    public final static ConfigOption<Float> rusticGrowthModifierOption = addOption(CATEGORY_RUSTIC, "GlobalGrowthProbabilityMultiplier", RusticModule.CONFIG_GLOBAL_GROWTH_MUL,RusticModule.CONFIG_GLOBAL_GROWTH_MUL,"This value is multiplied with the growth-probabilities of all growables added by Rustic");
+    public static float rusticGlobalGrowthMul;
 
-    public final static ConfigOption<Double> rusticCropGrowthProbabilitMultiplierOption =addOption(CATEGORY_RUSTIC, "CropGrowthProbabilityMultiplier", RusticModule.CONFIG_CROP_GROWTH_MUL,RusticModule.CONFIG_CROP_GROWTH_MUL, "This is the multiplier which is applied to all Rustic crops (tomatoes, herbs etc.)");
-    public static double rusticCropGrowthMul;
+    public final static ConfigOption<Float> rusticCropGrowthProbabilitMultiplierOption =addOption(CATEGORY_RUSTIC, "CropGrowthProbabilityMultiplier", RusticModule.CONFIG_CROP_GROWTH_MUL,RusticModule.CONFIG_CROP_GROWTH_MUL, "This is the multiplier which is applied to all Rustic crops (tomatoes, herbs etc.)");
+    public static float rusticCropGrowthMul;
+
+    public final static ConfigOption<Float> rusticGlobalHerbGrowthModifierOption = addOption(CATEGORY_RUSTIC, "HerbGrowthProbabilityMultiplier", RusticModule.CONFIG_HERB_GROWTH_MUL,RusticModule.CONFIG_HERB_GROWTH_MUL,"This is the multiplier which is applied to all Rustic herbs (cohosh, gingseng etc.)");
+    public static float rusticGlobalHerbGrowthModifier;
 
     //rustic specific crops
-    public final static ConfigOption<Double> rusticTomatoGrowthMulOption = addOption(CATEGORY_RUSTIC,"TomatoGrowthProbabilityMultiplier", RusticModule.CONFIG_TOMATO_GROWTH_MUL, RusticModule.CONFIG_TOMATO_GROWTH_MUL, "Groth-probability multiplier affecting only tomatoes");
-    public static double rusticTomatoGrowthMul;
+    public final static ConfigOption<Float> rusticTomatoGrowthMulOption = addOption(CATEGORY_RUSTIC,"TomatoGrowthProbabilityMultiplier", RusticModule.CONFIG_TOMATO_GROWTH_MUL, RusticModule.CONFIG_TOMATO_GROWTH_MUL, "Groth-probability multiplier affecting only tomatoes");
+    public static float rusticTomatoGrowthMul;
 
-    public final static ConfigOption<Double> rusticGrapeStemGrowthMulOption = addOption(CATEGORY_RUSTIC,"GrapeStemGrowthMul",RusticModule.CONFIG_GRAPE_LEAVES_GROWTH_MUL, RusticModule.CONFIG_GRAPE_STEM_GROWTH_MUL,"Modifies the growth  multiplier for grape stems");
-    public static double rusticGrapeStemGrowthMul;
+    public final static ConfigOption<Float> rusticGrapeStemGrowthMulOption = addOption(CATEGORY_RUSTIC,"GrapeStemGrowthMul",RusticModule.CONFIG_GRAPE_LEAVES_GROWTH_MUL, RusticModule.CONFIG_GRAPE_STEM_GROWTH_MUL,"Modifies the growth  multiplier for grape stems");
+    public static float rusticGrapeStemGrowthMul;
 
-    public final static ConfigOption<Double> rusticGrapeLeavesGrowthMulOption = addOption(CATEGORY_RUSTIC,"GrapeStemGrowthMul",RusticModule.CONFIG_GRAPE_LEAVES_GROWTH_MUL, RusticModule.CONFIG_GRAPE_LEAVES_GROWTH_MUL,"Modifies the growth  multiplier for grape leaves");
-    public static double rusticGrapeLeavesGrowthMul;
+    public final static ConfigOption<Float> rusticGrapeLeavesGrowthMulOption = addOption(CATEGORY_RUSTIC,"GrapeStemGrowthMul",RusticModule.CONFIG_GRAPE_LEAVES_GROWTH_MUL, RusticModule.CONFIG_GRAPE_LEAVES_GROWTH_MUL,"Modifies the growth  multiplier for grape leaves");
+    public static float rusticGrapeLeavesGrowthMul;
 
-    public final static ConfigOption<Double> rusticChiliGrowthMulOption = addOption(CATEGORY_RUSTIC, "ChiliGrowthMul", RusticModule.CONFIG_CHILI_GROWTH_MUL,RusticModule.CONFIG_CHILI_GROWTH_MUL, "Modifies the growth  multiplier for chilis");
-    public static double rusticChiliGrowthMul;
+    public final static ConfigOption<Float> rusticChiliGrowthMulOption = addOption(CATEGORY_RUSTIC, "ChiliGrowthMul", RusticModule.CONFIG_CHILI_GROWTH_MUL,RusticModule.CONFIG_CHILI_GROWTH_MUL, "Modifies the growth  multiplier for chilis");
+    public static float rusticChiliGrowthMul;
 
-    public final static ConfigOption<Double> rusticBerryGrowthMulOption = addOption(CATEGORY_RUSTIC,"BerryGrowthMul", RusticModule.CONFIG_BERRY_GROWTH_MUL, RusticModule.CONFIG_BERRY_GROWTH_MUL, "Modifies the growth  multiplier for berry bushes");
-    public static double rusticBerryGrowthMul;
+    public final static ConfigOption<Float> rusticBerryGrowthMulOption = addOption(CATEGORY_RUSTIC,"BerryGrowthMul", RusticModule.CONFIG_BERRY_GROWTH_MUL, RusticModule.CONFIG_BERRY_GROWTH_MUL, "Modifies the growth  multiplier for berry bushes");
+    public static float rusticBerryGrowthMul;
+
+
+    //rustic specific herbs
+    public final static ConfigOption<Float> rusticCohoshGrowthMulOption= addOption(CATEGORY_RUSTIC,"CohoshGrowthMul",RusticModule.CONFIG_COHOSH_GROWTH_MUL,RusticModule.CONFIG_COHOSH_GROWTH_MUL,"Modifies the growth multiplier of cohosh");
+    public static float rusticCohoshGrowthMul;
+
+    public final static ConfigOption<Float> rusticGingsentGrowthMulOption= addOption(CATEGORY_RUSTIC,"GingsengGrowthMul",RusticModule.CONFIG_GINGSENG_GROWTH_MUL,RusticModule.CONFIG_GINGSENG_GROWTH_MUL,"Modifies the growth multiplier of gingseng");
+    public static float rusticGingsengGrowthMul;
+
+    public final static ConfigOption<Float> rusticAloeVeraGrowthMulOption= addOption(CATEGORY_RUSTIC,"AloeVeraGrowthMul",RusticModule.CONFIG_ALOE_VERA_GROWTH_MUL, RusticModule.CONFIG_ALOE_VERA_GROWTH_MUL,"Modifies the growth multiplier of aloe vera");
+    public static float rusticAloeVeraGrowthMul;
+
+    public final static ConfigOption<Float> rusticBloodOrchidGrowthMulOption= addOption(CATEGORY_RUSTIC,"BloodOrchidGrowthMul",RusticModule.CONFIG_BLOOD_ORCHID_GROWTH_MUL, RusticModule.CONFIG_BLOOD_ORCHID_GROWTH_MUL,"Modifies the growth multiplier of blood orchids");
+    public static float rusticBloodOrchidGrowthMul;
+
+    public final static ConfigOption<Float> rusticChamomileGrowthMulOption= addOption(CATEGORY_RUSTIC,"ChamomileGrowthMul",RusticModule.CONFIG_CHAMOMILE_GROWTH_MUL, RusticModule.CONFIG_CHAMOMILE_GROWTH_MUL,"Modifies the growth multiplier of chamomiles");
+    public static float rusticChamomileGrowthMul;
+
+    public final static ConfigOption<Float> rusticCloudsbluffGrowthMulOption = addOption(CATEGORY_RUSTIC,"CloudsbluffGrowthMul",RusticModule.CONFIG_CLOUDSBLUFF_GROWTH_MUL, RusticModule.CONFIG_CLOUDSBLUFF_GROWTH_MUL,"Modifies the growth multiplier of cloudsfluffs");
+    public static float rusticCloudsbluffGrowthMul;
+
+    public final static ConfigOption<Float> rusticCoreRootGrowthMulOption = addOption(CATEGORY_RUSTIC,"CoreRootGrowthMul", RusticModule.CONFIG_CORE_ROOT_GROWTH_MUL, RusticModule.CONFIG_CORE_ROOT_GROWTH_MUL,"Modifies the growth multiplier of core roots");
+    public static float rusticCoreRootGrowthMul;
+
+    public final static ConfigOption<Float> rusticDeathstalkMushroomGrowthMulOption = addOption(CATEGORY_RUSTIC,"DeathStalkMushroomGrowthMul",RusticModule.CONFIG_DEATHSTALK_MUSHROOM_GROWTH_MUL,RusticModule.CONFIG_DEATHSTALK_MUSHROOM_GROWTH_MUL,"Modifies the growth multiplier of death stalks");
+    public static float rusticDeathstalkMushroomGrowthMul;
+
+    public final static ConfigOption<Float> rusticHorsetailGrowthMulOption = addOption(CATEGORY_RUSTIC,"HorsetailGrowthMul",RusticModule.CONFIG_HORSETAIL_GROWTH_MUL, RusticModule.CONFIG_HORSETAIL_GROWTH_MUL,"Modifies the growth multiplier of horsetail");
+    public static float rusticHorsetailGrowthMul;
+
+    public final static ConfigOption<Float> rusticMarshMallowGrowthMulOption = addOption(CATEGORY_RUSTIC,"MarshMallowGrowthMul",RusticModule.CONFIG_MARSH_MALLOW_GROWTH_MUL, RusticModule.CONFIG_MARSH_MALLOW_GROWTH_MUL,"Modifies the growth multiplier of marsh mallows");
+    public static float rusticMarshMallowGrowthMul;
+
+    public final static ConfigOption<Float> rusticMooncapMushroomGrowthMulOption= addOption(CATEGORY_RUSTIC,"MooncapMushroomGrowthMul",RusticModule.CONFIG_MOONCAP_MUSHROOM_GROWTH_MUL, RusticModule.CONFIG_MOONCAP_MUSHROOM_GROWTH_MUL,"Modifies the growth multiplier of mooncap mushrooms");
+    public static float rusticMooncapMushroomGrowthMul;
+
+    public final static ConfigOption<Float> rusticWindThistleGrowthMulOption = addOption(CATEGORY_RUSTIC,"WindThistleGrowthMul",RusticModule.CONFIG_WIND_THISTLE_GROWTH_MUL, RusticModule.CONFIG_WIND_THISTLE_GROWTH_MUL,"Modifies the growth multiplier of wind thistles");
+    public static float rusticWindThistleGrowthMul;
+
+
 
     static Configuration config;
     static Configuration blankSlateConfig;

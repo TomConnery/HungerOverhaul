@@ -52,7 +52,7 @@ public class PlantGrowthModification {
      * @param other the other modifier
      * @return a new instance with merged biome-list
      */
-    public PlantGrowthModification withTypeModifiersOf(PlantGrowthModification other) {
+    public PlantGrowthModification merge(PlantGrowthModification other) {
 
         //first copy this via making a new one and applying our values,
         //then apply the values of the other one

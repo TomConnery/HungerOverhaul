@@ -66,8 +66,8 @@ public class RusticModule {
     private static Block herb_wind_thistle;
 
     //shortcut vals
-    private final static float baseCropGrowthMul = (Config.rusticGlobalGrowthMul * Config.rusticCropGrowthMul);
-    private final static float baseHerbGrowthMul = (Config.rusticGlobalGrowthMul * Config.rusticGlobalHerbGrowthModifier);
+    private final static float baseCropGrowthMul = Config.rusticGlobalGrowthMul * Config.rusticCropGrowthMul;
+    private final static float baseHerbGrowthMul = Config.rusticGlobalGrowthMul * Config.rusticGlobalHerbGrowthModifier;
 
 
     public static void postInit() {
@@ -114,31 +114,31 @@ public class RusticModule {
         plantMap.put(crop_tomato.getClass(),
                 PlantGrowthModification.HUMID_GROWTH_MODIFIER
                         .merge(PlantGrowthModification.TROPICAL_GROWTH_MODIFIER)
-                        .setGrowthTickProbability((baseCropGrowthMul * Config.rusticTomatoGrowthMul))
+                        .setGrowthTickProbability(baseCropGrowthMul * Config.rusticTomatoGrowthMul)
         );
 
         plantMap.put(crop_chili.getClass(),
                 PlantGrowthModification.HUMID_GROWTH_MODIFIER
                         .merge(PlantGrowthModification.TROPICAL_GROWTH_MODIFIER)
-                        .setGrowthTickProbability((baseCropGrowthMul * Config.rusticChiliGrowthMul))
+                        .setGrowthTickProbability(baseCropGrowthMul * Config.rusticChiliGrowthMul)
         );
 
         plantMap.put(crop_grape_stem.getClass(),
                 PlantGrowthModification.HUMID_GROWTH_MODIFIER
                         .merge(PlantGrowthModification.TROPICAL_GROWTH_MODIFIER)
-                        .setGrowthTickProbability((baseCropGrowthMul * Config.rusticGrapeStemGrowthMul))
+                        .setGrowthTickProbability(baseCropGrowthMul * Config.rusticGrapeStemGrowthMul)
         );
 
         plantMap.put(crop_berry.getClass(),
                 PlantGrowthModification.HUMID_GROWTH_MODIFIER
                         .merge(PlantGrowthModification.TROPICAL_GROWTH_MODIFIER)
-                        .setGrowthTickProbability((baseCropGrowthMul * Config.rusticBerryGrowthMul))
+                        .setGrowthTickProbability(baseCropGrowthMul * Config.rusticBerryGrowthMul)
         );
 
         plantMap.put(crop_grape_leaves.getClass(),
                 PlantGrowthModification.WARM_SAPLING_MODIFIER
                         .merge(PlantGrowthModification.WARM_SAPLING_MODIFIER
-                                .setGrowthTickProbability((baseCropGrowthMul * Config.rusticGrapeLeavesGrowthMul))
+                                .setGrowthTickProbability(baseCropGrowthMul * Config.rusticGrapeLeavesGrowthMul)
                         )
         );
 
